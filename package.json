@@ -19,7 +19,6 @@
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
-    "parse-torrent-name": "^0.5.4",
     "parse-torrent-title": "^1.2.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
