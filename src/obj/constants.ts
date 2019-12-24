@@ -1,0 +1,22 @@
+export const movieExtensions = [
+  ".avi",
+  ".wmv",
+  ".mp4",
+  ".m4p",
+  ".m4v",
+  ".mpg",
+  ".mpeg",
+  ".mp2",
+  ".mpeg",
+  ".mpe",
+  ".mov",
+  ".qt",
+  ".mkv",
+  ".vob",
+  ".MTS",
+  ".rm",
+  ".rmvb",
+  ".amv",
+  ".rm",
+  ".rmvb"
+];
