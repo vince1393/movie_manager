@@ -20,3 +20,35 @@ export const movieExtensions = [
   ".rm",
   ".rmvb"
 ];
+
+export interface Rating {
+  Source: string;
+  Value: string;
+}
+
+export enum selectedMovieKeys {
+  //"Title",
+  //"Year",
+  "Rated",
+  "Released",
+  "Runtime",
+  "Genre",
+  "Director",
+  "Writer",
+  "Actors",
+  "Plot",
+  "Language",
+  "Country",
+  "Awards",
+  "Poster",
+  "Ratings",
+  //"Metascore",
+  "imdbRating",
+  //"imdbVotes",
+  //"imdbID",
+  //"Type",
+  //"DVD",
+  "BoxOffice",
+  "Production",
+  "Website"
+}
