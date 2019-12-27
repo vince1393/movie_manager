@@ -52,3 +52,10 @@ export enum selectedMovieKeys {
   "Production",
   "Website"
 }
+
+export enum LoadingStatus {
+  notLoading = "",
+  scanningFiles = "Scanning Files",
+  apiCall = "Getting movie information",
+  done = "Done"
+}

@@ -6,20 +6,15 @@ const shell = window.require("electron").shell;
 
 type Props = {
   movie: Movie;
+  handleClose: () => void;
 };
 const SelectedMovieTile = (props: Props) => {
-  const { movie } = props;
-  console.log(movie.Ratings);
-  movie.Ratings.forEach(rating => console.log(rating));
-  const movieValues = Object.values(movie);
+  const { movie, handleClose } = props;
   return (
     <div className={styles.container}>
       <div className={styles.description}>
         <h1>{movie.Title}</h1>
         <h5>{movie.Year}</h5>
-        {/*         {movieValues.map(value => {
-          return <div>{value.toString()}</div>;
-        })} */}
         <div>Rated: {movie.Rated}</div>
         <div>Released: {movie.Released}</div>
         <div>Runtime: {movie.Runtime}</div>
@@ -45,6 +40,9 @@ const SelectedMovieTile = (props: Props) => {
       <div className={styles.poster}>
         <img src={movie.Poster} alt="" />
       </div>
+      <button className={styles.closeButton} onClick={handleClose}>
+        X
+      </button>
     </div>
   );
 };
