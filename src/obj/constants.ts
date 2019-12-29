@@ -56,6 +56,7 @@ export enum selectedMovieKeys {
 export enum LoadingStatus {
   notLoading = "",
   scanningFiles = "Scanning Files",
+  gettingGenres = "Getting movie genres",
   apiCall = "Getting movie information",
   done = "Done"
 }

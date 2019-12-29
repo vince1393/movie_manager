@@ -7,6 +7,7 @@ import { getMovies } from "../../api/movieApi";
 import Loading from "../common/Loading/Loading";
 import { LoadingStatus } from "../../obj/constants";
 import Poster from "./MovieRows/Poster/Poster";
+import MovieRows from "./MovieRows/MovieRows";
 
 type Props = {
   path: string;
@@ -18,16 +19,26 @@ const MovieManagerContainer = (props: Props) => {
   const [loadingStatus, setloadingStatus] = useState<LoadingStatus>(
     LoadingStatus.scanningFiles
   );
+  const [genres, setGenres] = useState<string[]>([]);
 
   const getMovieInfo = async (moviePaths: string[]) => {
-    const _movieList = await getMovies(moviePaths);
-    setMovieList((oldMovies: Movie[]) => [...oldMovies, ..._movieList]);
-    setloadingStatus(LoadingStatus.done);
+    setloadingStatus(LoadingStatus.apiCall); //change loading screen
+    const _movieList = await getMovies(moviePaths); //API call to get movies
+    setMovieList((oldMovies: Movie[]) => [...oldMovies, ..._movieList]); //update state
+
+    // get unique genres
+    setloadingStatus(LoadingStatus.gettingGenres);
+    const allGenres: string[] = _movieList
+      .map(movie => movie.Genre.split(","))
+      .join()
+      .split(",");
+    const uniqueGenres: string[] = [...new Set(allGenres)];
+    setGenres(uniqueGenres); //update state genres
+    setloadingStatus(LoadingStatus.done); // loading done
   };
 
   useEffect(() => {
     const moviePaths = getMoviePaths(props.path);
-    setloadingStatus(LoadingStatus.apiCall);
     getMovieInfo(moviePaths);
   }, []); //
 
@@ -47,18 +58,11 @@ const MovieManagerContainer = (props: Props) => {
           />
         )}
         <div>
-          {movieList.map(movie => {
-            console.log(movieList.length);
-            return (
-              <Poster
-                posterUrl={movie.Poster}
-                title={movie.Title}
-                year={movie.Year}
-                onClick={() => setSelectedMovie(movie)}
-                onKeyDown={e => e.key === "Enter" && setSelectedMovie(movie)}
-              />
-            );
-          })}
+          <MovieRows
+            movies={movieList}
+            onPosterClick={setSelectedMovie}
+            genres={genres}
+          />
         </div>
       </div>
     );

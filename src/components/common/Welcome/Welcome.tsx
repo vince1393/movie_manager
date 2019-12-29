@@ -16,7 +16,10 @@ const Welcome = (props: Props) => {
   };
   return (
     <div className={styles.container}>
-      <h2>Welcome to _______! To get started, select a folder to scan.</h2>
+      <h2>
+        Welcome to *Insert program name here*! To get started, select a folder
+        to scan.
+      </h2>
       <button className={styles.startButton} onClick={showDialog}>
         Select a folder to scan
       </button>
