@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <div className={styles.container}>
       {rootFolder ? (
-        <MovieManagerContainer path={rootFolder}></MovieManagerContainer>
+        <MovieManagerContainer path={rootFolder} />
       ) : (
         <Welcome onDialogSelect={setRootFolder} />
       )}

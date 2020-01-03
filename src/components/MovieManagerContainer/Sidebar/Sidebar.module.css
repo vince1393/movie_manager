@@ -1,0 +1,88 @@
+.sidebar {
+  width: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  z-index: 99;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  width: 0;
+}
+
+.visible {
+  width: 20vw;
+  animation-name: op;
+  animation-duration: 0.1s;
+}
+
+@keyframes op {
+  from {
+    width: 0;
+  }
+  to {
+    width: 20vw;
+  }
+}
+
+@keyframes close {
+  from {
+    width: 20vw;
+  }
+  to {
+    width: 0px;
+  }
+}
+
+.sortOptions {
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  color: rgba(255, 255, 255);
+  border: none;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 15px;
+  padding-right: 15vw;
+  padding-left: 30px;
+}
+.sortOptions:hover,
+.closeButton:hover {
+  background-color: skyblue;
+}
+
+.sortOptions:hover.selected {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+.selected {
+  cursor: default;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+.closeButton {
+  text-align: left;
+  cursor: pointer;
+  background: grey;
+  color: black;
+  border: none;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bolder;
+  line-height: 1.5;
+  padding: 15px;
+  padding-left: 30px;
+}
+
+.backdrop {
+  background: transparent;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}

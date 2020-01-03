@@ -60,3 +60,10 @@ export enum LoadingStatus {
   apiCall = "Getting movie information",
   done = "Done"
 }
+
+export enum SortOptions {
+  Genre = "Genre",
+  Alphabetical = "Alphabetical",
+  All = "All",
+  Series = "Series"
+}

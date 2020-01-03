@@ -18,26 +18,27 @@ const SelectedMovieTile = (props: Props) => {
         <div>Rated: {movie.Rated}</div>
         <div>Released: {movie.Released}</div>
         <div>Runtime: {movie.Runtime}</div>
-        <div>Genre: {movie.Genre}</div>
+        <div>Genre: {movie.Genre.join(", ")}</div>
         <div>Country: {movie.Country}</div>
-        <div>Meta Score: {movie.Metascore}</div>
-        <div>IMDb Rating: {movie.imdbRating}</div>
         <div>Production: {movie.Production}</div>
         <div>Box Office: {movie.BoxOffice}</div>
-        <div>Awards: {movie.Awards}</div>
         <div>Director: {movie.Director}</div>
         <div>Writer: {movie.Writer}</div>
         <div>Actors: {movie.Actors}</div>
-        <div>Plot: {movie.Plot}</div>
+        <div>Plot: {movie.Plot}</div>6
         <button
           onClick={() => {
-            shell.openItem(movie.Path);
+            try {
+              movie.Path && shell.openItem(movie.Path);
+            } catch (e) {
+              console.error(e);
+            }
           }}
         >
           Play
         </button>
       </div>
-      <div className={styles.poster}>
+      <div className={styles.selectedPoster}>
         <img src={movie.Poster} alt="" />
       </div>
       <button className={styles.closeButton} onClick={handleClose}>

@@ -7,6 +7,10 @@ const url = require("url");
 
 let mainWindow;
 
+function setApiConfig() {
+  global.sharedObj = { apiAddress: "https://api.themoviedb.org/3" };
+}
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
@@ -15,6 +19,8 @@ function createWindow() {
       nodeIntegration: true
     }
   });
+
+  setApiConfig();
 
   mainWindow.loadURL(
     process.env.ELECTRON_START_URL ||

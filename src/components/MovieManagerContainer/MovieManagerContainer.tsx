@@ -5,9 +5,11 @@ import SelectedMovieTile from "./SelectedMovieTile/SelectedMovieTile";
 import styles from "./MovieManagerContainer.module.css";
 import { getMovies } from "../../api/movieApi";
 import Loading from "../common/Loading/Loading";
-import { LoadingStatus } from "../../obj/constants";
-import Poster from "./MovieRows/Poster/Poster";
+import { LoadingStatus, SortOptions } from "../../obj/constants";
+import Poster from "../common/Poster/Poster";
 import MovieRows from "./MovieRows/MovieRows";
+import Header from "../common/Heading/Header";
+import Sidebar from "./Sidebar/Sidebar";
 
 type Props = {
   path: string;
@@ -16,10 +18,9 @@ type Props = {
 const MovieManagerContainer = (props: Props) => {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Movie | undefined>();
-  const [loadingStatus, setloadingStatus] = useState<LoadingStatus>(
-    LoadingStatus.scanningFiles
-  );
-  const [genres, setGenres] = useState<string[]>([]);
+  const [loadingStatus, setloadingStatus] = useState<LoadingStatus>(LoadingStatus.scanningFiles);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [currentSort, setCurrentSort] = useState<SortOptions>(SortOptions.Genre);
 
   const getMovieInfo = async (moviePaths: string[]) => {
     setloadingStatus(LoadingStatus.apiCall); //change loading screen
@@ -28,12 +29,6 @@ const MovieManagerContainer = (props: Props) => {
 
     // get unique genres
     setloadingStatus(LoadingStatus.gettingGenres);
-    const allGenres: string[] = _movieList
-      .map(movie => movie.Genre.split(","))
-      .join()
-      .split(",");
-    const uniqueGenres: string[] = [...new Set(allGenres)];
-    setGenres(uniqueGenres); //update state genres
     setloadingStatus(LoadingStatus.done); // loading done
   };
 
@@ -51,6 +46,16 @@ const MovieManagerContainer = (props: Props) => {
   if (loadingStatus === LoadingStatus.done) {
     content = (
       <div>
+        <Sidebar
+          isOpen={isSidebarOpen}
+          currentSort={currentSort}
+          handleSortChange={(sort: SortOptions) => {
+            setCurrentSort(sort);
+          }}
+          handleMenuClose={() => setIsSidebarOpen(false)}
+        />
+        <Header handleMenuClick={() => setIsSidebarOpen(true)} />
+
         {selectedMovie && (
           <SelectedMovieTile
             movie={selectedMovie}
@@ -58,11 +63,7 @@ const MovieManagerContainer = (props: Props) => {
           />
         )}
         <div>
-          <MovieRows
-            movies={movieList}
-            onPosterClick={setSelectedMovie}
-            genres={genres}
-          />
+          <MovieRows movies={movieList} onPosterClick={setSelectedMovie} sortOption={currentSort} />
         </div>
       </div>
     );

@@ -21,7 +21,8 @@
     "constructor-super": "warn",
     "valid-typeof": "warn",
     "quotes": [2, "single"],
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "max-len": ["error", { "code": 160 }]
   },
   "parser": "babel-eslint",
   "extends": "airbnb",

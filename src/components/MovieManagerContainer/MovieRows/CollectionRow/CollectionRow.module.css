@@ -1,0 +1,9 @@
+.rowContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.rowHeader {
+  margin-left: 15px;
+}
