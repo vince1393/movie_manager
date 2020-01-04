@@ -20,6 +20,7 @@ const MovieManagerContainer = (props: Props) => {
   const [selectedMovie, setSelectedMovie] = useState<Movie | undefined>();
   const [loadingStatus, setloadingStatus] = useState<LoadingStatus>(LoadingStatus.scanningFiles);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isSelectedMovieOpen, setIsSelectedMovieOpen] = useState<boolean>(false);
   const [currentSort, setCurrentSort] = useState<SortOptions>(SortOptions.Genre);
 
   const getMovieInfo = async (moviePaths: string[]) => {
@@ -43,15 +44,30 @@ const MovieManagerContainer = (props: Props) => {
     <Loading status={""} />
   );
 
+  useEffect(() => {
+    if (selectedMovie) setIsSelectedMovieOpen(true);
+  }, [selectedMovie]);
+
+  const onSortChange = (sort: SortOptions) => {
+    setCurrentSort(sort);
+    closeSelectedMovie();
+    setIsSidebarOpen(false);
+  };
+
+  const closeSelectedMovie = () => {
+    setIsSelectedMovieOpen(false);
+    setTimeout(() => {
+      setSelectedMovie(undefined);
+    }, 100);
+  };
+
   if (loadingStatus === LoadingStatus.done) {
     content = (
-      <div>
+      <div className={styles.container}>
         <Sidebar
           isOpen={isSidebarOpen}
           currentSort={currentSort}
-          handleSortChange={(sort: SortOptions) => {
-            setCurrentSort(sort);
-          }}
+          handleSortChange={onSortChange}
           handleMenuClose={() => setIsSidebarOpen(false)}
         />
         <Header handleMenuClick={() => setIsSidebarOpen(true)} />
@@ -59,7 +75,8 @@ const MovieManagerContainer = (props: Props) => {
         {selectedMovie && (
           <SelectedMovieTile
             movie={selectedMovie}
-            handleClose={() => setSelectedMovie(undefined)}
+            isOpen={isSelectedMovieOpen}
+            handleClose={closeSelectedMovie}
           />
         )}
         <div>

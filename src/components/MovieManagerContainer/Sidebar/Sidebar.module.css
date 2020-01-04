@@ -3,6 +3,8 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 99;
   overflow: auto;
   display: flex;
@@ -43,15 +45,15 @@
   background: none;
   color: rgba(255, 255, 255);
   border: none;
-  font-size: 18px;
+  font-size: 1.9vh;
   line-height: 1.5;
-  padding: 15px;
+  padding: 1.4vh;
   padding-right: 15vw;
   padding-left: 30px;
 }
 .sortOptions:hover,
 .closeButton:hover {
-  background-color: skyblue;
+  background-color: darkred;
 }
 
 .sortOptions:hover.selected {
@@ -72,10 +74,10 @@
   color: black;
   border: none;
   display: inline-block;
-  font-size: 18px;
+  font-size: 1.9vh;
   font-weight: bolder;
   line-height: 1.5;
-  padding: 15px;
+  padding: 1.4vh;
   padding-left: 30px;
 }
 

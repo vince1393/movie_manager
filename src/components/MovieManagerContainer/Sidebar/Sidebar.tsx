@@ -27,10 +27,7 @@ const Sidebar = (props: Props) => {
         {options.map(option => {
           return (
             <button
-              onClick={() => {
-                handleSortChange(SortOptions[option]);
-                handleMenuClose();
-              }}
+              onClick={() => handleSortChange(SortOptions[option])}
               className={[
                 styles.sortOptions,
                 currentSort === SortOptions[option] ? styles.selected : "",

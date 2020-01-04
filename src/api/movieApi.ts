@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Movie, SearchTMDBMovie, TMDBMovie } from "../obj/queries";
+import { Movie, SearchTMDBMovie, TMDBMovie, Results } from "../obj/queries";
 import ptt from "parse-torrent-title";
 const path = window.require("path");
 const omdbApi: string = "http://www.omdbapi.com/";
@@ -28,7 +28,6 @@ export const searchMovie = async (title: string, year: string = ""): Promise<Mov
       `${tmdbApi}/search/movie?api_key=${process.env.REACT_APP_API_KEY_TMDB}&query=${formattedTitle}&year=${year}`
     )
     .then(response => {
-      console.log(response.data);
       return response.data.total_results > 0
         ? response.data.results[0]
         : console.error(`Error: ${response.data.toString()} - Movie: ${title} Year: ${year}`);
@@ -83,14 +82,23 @@ const convertTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
     BoxOffice: tmdbMovie.revenue?.toString(),
     Production: tmdbMovie.production_companies.map(company => company.name).join(),
     Website: tmdbMovie.homepage,
-    trailerKey: tmdbMovie.videos.results[0]?.key
+    trailerKey: tmdbMovie.videos.results[0]?.key,
+    mpaaRating: getMpaaRating(tmdbMovie?.release_dates?.results)
   };
+};
+
+const getMpaaRating = (results: Results[]) => {
+  if (!results) return "unrated";
+  return (
+    results.filter(result => result.iso_3166_1 === "US")[0]?.release_dates[0]?.certification ||
+    "unrated"
+  );
 };
 
 export const getMovie = async (id: number): Promise<TMDBMovie> => {
   return await axios
     .get(
-      `${tmdbApi}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY_TMDB}&append_to_response=videos,images,credits`
+      `${tmdbApi}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY_TMDB}&append_to_response=videos,images,credits,release_dates`
     )
     .then(response => {
       return response.data
