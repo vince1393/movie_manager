@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Movie, BelongsToCollection } from "../../../../obj/queries";
+import { BelongsToCollection } from "../../../../obj/queries";
 import Poster from "../../../common/Poster/Poster";
 import styles from "./CollectionRow.module.css";
+import { Movie } from "../../../../obj/types";
 
 type Props = {
   movies: Movie[];

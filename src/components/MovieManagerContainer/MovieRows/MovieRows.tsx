@@ -1,9 +1,10 @@
 import React from "react";
-import { Movie, BelongsToCollection } from "../../../obj/queries";
+import { BelongsToCollection } from "../../../obj/queries";
 import Poster from "../../common/Poster/Poster";
 import MovieRow from "./MovieRow/MovieRow";
 import { SortOptions } from "../../../obj/constants";
 import CollectionRow from "./CollectionRow/CollectionRow";
+import { Movie } from "../../../obj/types";
 
 type Props = {
   movies: Movie[];
@@ -13,7 +14,6 @@ type Props = {
 
 const MovieRows = (props: Props) => {
   const { sortOption, movies, onPosterClick } = props;
-  console.log(" OPTION", sortOption);
 
   let movieRows: JSX.Element[] = [];
 

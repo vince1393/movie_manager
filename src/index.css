@@ -32,3 +32,11 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(143, 39, 39);
 }
+
+.ytp-watermark {
+  opacity: 0 !important;
+}
+
+.ytp-title-text {
+  opacity: 0 !important;
+}

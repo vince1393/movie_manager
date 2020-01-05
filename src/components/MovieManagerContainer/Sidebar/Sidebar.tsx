@@ -12,7 +12,6 @@ type Props = {
 const Sidebar = (props: Props) => {
   const { isOpen, currentSort, handleSortChange, handleMenuClose } = props;
 
-  console.log(isOpen);
   const options = Object.values(SortOptions);
 
   return (

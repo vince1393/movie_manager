@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Movie } from "../../obj/queries";
+import { Movie } from "../../obj/types";
 import { getMoviePaths } from "../../util/fileScanner";
 import SelectedMovieTile from "./SelectedMovieTile/SelectedMovieTile";
 import styles from "./MovieManagerContainer.module.css";
@@ -36,7 +36,13 @@ const MovieManagerContainer = (props: Props) => {
   useEffect(() => {
     const moviePaths = getMoviePaths(props.path);
     getMovieInfo(moviePaths);
-  }, []); //
+  }, []);
+
+  // This syncs the boolean value with the content.
+  // Not using content for showing because causes the component to snap shut as oppposed to animate
+  useEffect(() => {
+    if (selectedMovie) setIsSelectedMovieOpen(true);
+  }, [selectedMovie]);
 
   let content = loadingStatus ? (
     <Loading status={loadingStatus.toString()} />
@@ -44,16 +50,13 @@ const MovieManagerContainer = (props: Props) => {
     <Loading status={""} />
   );
 
-  useEffect(() => {
-    if (selectedMovie) setIsSelectedMovieOpen(true);
-  }, [selectedMovie]);
-
   const onSortChange = (sort: SortOptions) => {
     setCurrentSort(sort);
     closeSelectedMovie();
     setIsSidebarOpen(false);
   };
 
+  //this waits for the animation to finish before removing the content
   const closeSelectedMovie = () => {
     setIsSelectedMovieOpen(false);
     setTimeout(() => {

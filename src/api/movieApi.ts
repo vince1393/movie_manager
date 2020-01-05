@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Movie, SearchTMDBMovie, TMDBMovie, Results } from "../obj/queries";
+import { SearchTMDBMovie, TMDBMovie, Results } from "../obj/queries";
+import { Movie } from "../obj/types";
 import ptt from "parse-torrent-title";
 const path = window.require("path");
 const omdbApi: string = "http://www.omdbapi.com/";
@@ -48,23 +49,16 @@ const convertTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
     Released: new Date(tmdbMovie.release_date).toLocaleDateString(),
     Runtime: tmdbMovie.runtime?.toString(),
     Genre: tmdbMovie.genres.map(genre => genre.name),
-    Director: tmdbMovie.credits.crew
-      .filter(crew => crew.job === "Director")
-      .map(crew => crew.name)
-      .join(", "),
-    Writer: tmdbMovie.credits.crew
-      .filter(crew => crew.job === "Writer")
-      .map(crew => crew.name)
-      .join(", "),
-    Actors: tmdbMovie.credits.cast
-      .map(actor => `${actor.name}(${actor.character})`)
-      .slice(0, 15)
-      .join(", "),
+    Director: tmdbMovie.credits.crew.filter(crew => crew.job === "Director").map(crew => crew.name),
+    Writer: tmdbMovie.credits.crew.filter(crew => crew.job === "Writer").map(crew => crew.name),
+    Actors: tmdbMovie.credits.cast.map(actor => {
+      return { name: actor.name, character: actor.character };
+    }),
     Plot: tmdbMovie.overview,
     Language: tmdbMovie.original_language,
-    Country: tmdbMovie.production_countries.map(country => country.name).join(),
+    Country: tmdbMovie.production_countries.map(country => country.name).join(", "),
     Awards: "", //NOT SUPPORTED BY NEW API YET
-    Poster: tmdbImageUrl + tmdbMovie.poster_path,
+    Poster: tmdbMovie.poster_path ? tmdbImageUrl + tmdbMovie.poster_path : undefined,
     Backdrop: tmdbMovie.images?.backdrops
       ? tmdbMovie.images.backdrops.map(backdrop => tmdbImageUrl + backdrop.file_path)
       : undefined,
@@ -79,20 +73,13 @@ const convertTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
         : undefined
     },
     imdbID: tmdbMovie.imdb_id,
-    BoxOffice: tmdbMovie.revenue?.toString(),
-    Production: tmdbMovie.production_companies.map(company => company.name).join(),
+    BoxOffice: tmdbMovie.revenue ? "$" + tmdbMovie.revenue.toLocaleString() : "Unknown",
+    Production: tmdbMovie.production_companies.map(company => company.name),
     Website: tmdbMovie.homepage,
     trailerKey: tmdbMovie.videos.results[0]?.key,
-    mpaaRating: getMpaaRating(tmdbMovie?.release_dates?.results)
+    mpaaRating: tmdbMovie?.release_dates?.results.filter(result => result.iso_3166_1 === "US")[0]
+      ?.release_dates[0]?.certification
   };
-};
-
-const getMpaaRating = (results: Results[]) => {
-  if (!results) return "unrated";
-  return (
-    results.filter(result => result.iso_3166_1 === "US")[0]?.release_dates[0]?.certification ||
-    "unrated"
-  );
 };
 
 export const getMovie = async (id: number): Promise<TMDBMovie> => {

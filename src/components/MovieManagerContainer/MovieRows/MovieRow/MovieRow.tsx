@@ -1,5 +1,5 @@
 import React from "react";
-import { Movie } from "../../../../obj/queries";
+import { Movie } from "../../../../obj/types";
 import Poster from "../../../common/Poster/Poster";
 import styles from "./MovieRow.module.css";
 

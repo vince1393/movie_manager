@@ -10,6 +10,7 @@
 
 # production
 /build
+/movie_manager*
 
 # misc
 .DS_Store

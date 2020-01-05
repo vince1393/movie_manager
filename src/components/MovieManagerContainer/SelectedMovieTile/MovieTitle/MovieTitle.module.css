@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  padding: 1vh 1vw;
+  margin: 0;
+  font-size: 2em;
+}
+.detailContainer {
+  padding-left: 0.4vw;
+  padding-top: 0.5vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.detail {
+  color: white;
+  font-size: 0.8em;
+  margin: 0.5vh 0.3vw;
+  margin-bottom: 0;
+  padding: 0.2vh 0.3vw;
+  display: inline-block;
+}
+
+.detail pre {
+  margin: 0;
+}
+
+.good {
+  color: rgb(0, 145, 0);
+}
+
+.average {
+  color: rgb(250, 218, 94);
+}
+.poor {
+  color: rgb(145, 0, 0);
+}
+
+.rating {
+  font-weight: bold;
+}
+
+.mpaaRating {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  line-height: 3em;
+}
+
+.playButton {
+  padding: 0 1.1vw;
+  margin: 2.1vh 1vw;
+  height: 2.7vh;
+  color: red;
+  background-color: black;
+  border-radius: 18px;
+  border: solid red 2px;
+}
+
+.playButton:hover {
+  background-color: red;
+  color: black;
+}

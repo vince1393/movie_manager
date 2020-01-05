@@ -45,7 +45,7 @@
   background: none;
   color: rgba(255, 255, 255);
   border: none;
-  font-size: 1.9vh;
+  font-size: 1em;
   line-height: 1.5;
   padding: 1.4vh;
   padding-right: 15vw;
@@ -74,7 +74,7 @@
   color: black;
   border: none;
   display: inline-block;
-  font-size: 1.9vh;
+  font-size: 1em;
   font-weight: bolder;
   line-height: 1.5;
   padding: 1.4vh;
