@@ -23,13 +23,10 @@ function createWindow() {
   setApiConfig();
 
   mainWindow.loadURL(
-    process.env.ELECTRON_START_URL ||
-      url.format({
-        pathname: path.join(__dirname, "/../public/index.html"),
-        protocol: "file:",
-        slashes: true
-      })
+    process.env.ELECTRON_START_URL ? "http://localhost:3000" : `file://${__dirname}/index.html`
   );
+
+  mainWindow.openDevTools();
 
   mainWindow.on("closed", () => {
     mainWindow = null;

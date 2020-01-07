@@ -2,7 +2,8 @@
   "name": "movie_manager",
   "version": "0.1.0",
   "homepage": "./",
-  "main": "src/electron-starter.js",
+  "private": true,
+  "main": "public/electron.js",
   "scripts": {
     "start": "nf start -p 3000",
     "build": "react-scripts build",
@@ -12,7 +13,7 @@
     "electron-start": "node src/electron-wait-react",
     "react-start": "react-scripts start",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "dist": "react-scripts build &&  electron-builder --win -p always",
     "postinstall": "install-app-deps"
   },
   "author": {
@@ -39,18 +40,24 @@
     "eslint-plugin-react": "^7.17.0",
     "fs": "0.0.1-security",
     "parse-torrent-title": "^1.2.0",
+    "foreman": "^3.0.1",
+    "react-youtube": "^7.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
     "typescript": "^3.7.4"
   },
   "build": {
-    "appId": "com.electron.movie_manager",
-    "win": {},
+    "appId": "com.movie_manager",
+    "compression": "normal",
+    "productName": "Movie_Manager",
     "directories": {
-      "buildResources": "public"
+      "buildResources": "build",
+      "output": "dist"
     },
-    "extends": null
+    "win": {
+      "target": "nsis"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
