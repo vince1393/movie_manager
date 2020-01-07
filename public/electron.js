@@ -1,4 +1,6 @@
-const { app, BrowserWindow, shell, ipcMain, Menu, remote } = require("electron");
+// constructed using https://github.com/getstream/winds
+
+const { app, BrowserWindow, ipcMain, remote } = require("electron");
 
 const isDev =
   "ELECTRON_IS_DEV" in process.env
@@ -30,11 +32,7 @@ const createWindow = () => {
   });
 
   mainWindow.on("close", event => {
-    if (app.quitting) mainWindow = null;
-    else {
-      event.preventDefault();
-      mainWindow.hide();
-    }
+    mainWindow = null;
   });
 };
 
@@ -43,15 +41,17 @@ app.on("ready", () => {
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
 });
 
 app.on("activate", () => {
   if (mainWindow === null) createWindow();
   else mainWindow.show();
 });
-
-app.on("before-quit", () => (app.quitting = true));
 
 ipcMain.on("load-page", (event, arg) => {
   mainWindow.loadURL(arg);

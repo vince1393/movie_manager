@@ -12,6 +12,7 @@
 /build
 /movie_manager*
 /dist/*
+dist.zip
 
 # misc
 .DS_Store

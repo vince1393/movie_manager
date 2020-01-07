@@ -1,25 +1,10 @@
 import axios from "axios";
-import { SearchTMDBMovie, TMDBMovie, Results } from "../obj/queries";
+import { SearchTMDBMovie, TMDBMovie } from "../obj/queries";
 import { Movie } from "../obj/types";
 import ptt from "parse-torrent-title";
 const path = window.require("path");
-const omdbApi: string = "http://www.omdbapi.com/";
 const tmdbApi: string = "https://api.themoviedb.org/3";
 const tmdbImageUrl: string = "https://image.tmdb.org/t/p/original/";
-
-export const getMovie_DEPRECATED = async (title: string, year: string = ""): Promise<Movie> => {
-  const formattedTitle = title.split(" ").join("+");
-
-  return await axios
-    .get(
-      `${omdbApi}?apikey=${process.env.REACT_APP_API_KEY}&t=${formattedTitle}&y=${year}&plot=full`
-    )
-    .then(response => {
-      return !response.data.Error
-        ? response.data
-        : console.error(`Error: ${response.data.Error} - Movie: ${title} Year: ${year}`);
-    });
-};
 
 export const searchMovie = async (title: string, year: string = ""): Promise<Movie | undefined> => {
   const formattedTitle = encodeURI(title);
