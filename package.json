@@ -1,9 +1,25 @@
 {
   "name": "movie_manager",
   "version": "0.1.0",
-  "private": true,
   "homepage": "./",
-  "main": "src/start.js",
+  "main": "src/electron-starter.js",
+  "scripts": {
+    "start": "nf start -p 3000",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-start": "node src/electron-wait-react",
+    "react-start": "react-scripts start",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "install-app-deps"
+  },
+  "author": {
+    "name": "vince1393",
+    "email": "vromani@outlook.com"
+  },
+  "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
@@ -29,26 +45,13 @@
     "sqlite3": "^4.1.1",
     "typescript": "^3.7.4"
   },
-  "scripts": {
-    "start": "nf start -p 3000",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-start": "node src/start-react",
-    "react-start": "react-scripts start",
-    "pack": "build --dir",
-    "dist": "npm run build && build",
-    "postinstall": "install-app-deps"
-  },
   "build": {
-    "appId": "com.electron.electron-with-create-react-app",
-    "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
-    },
+    "appId": "com.electron.movie_manager",
+    "win": {},
     "directories": {
       "buildResources": "public"
-    }
+    },
+    "extends": null
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -72,5 +75,10 @@
     "foreman": "^3.0.1",
     "prettier": "1.19.1",
     "react-youtube": "^7.9.0"
-  }
+  },
+  "files": [
+    "*.js",
+    "build",
+    "node_modules"
+  ]
 }
