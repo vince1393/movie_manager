@@ -4,7 +4,7 @@ import { Movie } from "../obj/types";
 import ptt from "parse-torrent-title";
 const path = window.require("path");
 const tmdbApi: string = "https://api.themoviedb.org/3";
-const tmdbImageUrl: string = "https://image.tmdb.org/t/p/original/";
+const tmdbImageUrl: string = "https://image.tmdb.org/t/p/w500/";
 
 export const searchMovie = async (title: string, year: string = ""): Promise<Movie | undefined> => {
   const formattedTitle = encodeURI(title);

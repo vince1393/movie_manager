@@ -41,6 +41,7 @@ const SelectedMovieTile = (props: Props) => {
     );
   };
   const startMovie = () => {
+    handleClose();
     try {
       movie.Path && shell.openItem(movie.Path);
     } catch (e) {
