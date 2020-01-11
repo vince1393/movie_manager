@@ -1,0 +1,13 @@
+.searchBar {
+  margin-left: 15px;
+  margin-top: 2em;
+  padding: 0.5em;
+  color: white;
+  background-color: rgb(100, 100, 100);
+  border: solid 1px red;
+  width: 30em;
+  height: 1.2em;
+  border-radius: 5px;
+  font-size: 1em;
+  font: Roboto;
+}

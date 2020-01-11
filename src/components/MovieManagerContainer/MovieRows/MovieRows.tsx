@@ -5,6 +5,7 @@ import MovieRow from "./MovieRow/MovieRow";
 import { SortOptions } from "../../../obj/constants";
 import CollectionRow from "./CollectionRow/CollectionRow";
 import { Movie } from "../../../obj/types";
+import Search from "./Search/Search";
 
 type Props = {
   movies: Movie[];
@@ -52,7 +53,7 @@ const MovieRows = (props: Props) => {
   };
 
   const createRowsByAll = (): JSX.Element[] => [
-    <MovieRow genre={"All"} movies={movies} onPosterClick={onPosterClick} isMultiRow={true} />
+    <Search movies={movies} onPosterClick={onPosterClick}/>
   ];
 
   const createRowsBySeries = () => {

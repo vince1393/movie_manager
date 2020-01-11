@@ -11,4 +11,9 @@
 
 .rowHeader {
   margin-left: 15px;
+  margin-bottom: 0;
+}
+
+.noContent {
+  margin: 0 15px;
 }
