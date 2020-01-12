@@ -8,13 +8,12 @@ type Props = {
   year: string;
   length: string;
   genres: string[];
-  country: string;
   boxOffice: string;
   handlePlay: () => void;
 };
 
 const MovieTitle = (props: Props) => {
-  const { title, rating, mpaaRating, length, genres, year, country, boxOffice, handlePlay } = props;
+  const { title, rating, mpaaRating, length, genres, year, boxOffice, handlePlay } = props;
 
   const getRatingColor = (): string => {
     const numRating = parseFloat(rating);

@@ -23,9 +23,10 @@ const Sidebar = (props: Props) => {
         >
           Close
         </button>
-        {options.map(option => {
+        {options.map((option, index) => {
           return (
             <button
+              key={index}
               onClick={() => handleSortChange(SortOptions[option])}
               className={[
                 styles.sortOptions,

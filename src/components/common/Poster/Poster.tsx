@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./Poster.module.css";
-import YouTube, { Options } from "react-youtube";
 
 type Props = {
   posterUrl: string | undefined;

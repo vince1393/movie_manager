@@ -16,9 +16,10 @@ const MovieRow = (props: Props) => {
     <div>
       <h2 className={styles.rowHeader}>{genre}</h2>
       <div className={isMultiRow ? styles.multiRowContainer : styles.rowContainer}>
-        {movies.map(movie => {
+        {movies.map((movie, index) => {
           return (
             <Poster
+              key={index}
               title={movie.Title}
               posterUrl={movie.Poster}
               onClick={() => onPosterClick(movie)}

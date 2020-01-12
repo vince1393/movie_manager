@@ -11,7 +11,6 @@ type Props = {
 const Search = (props: Props) => {
   const [searchText, setSearchText] = useState<string>("");
   const { movies, onPosterClick } = props;
-  const searchProperties = ["Title", "Director", "Writer", "Production"];
 
   // default shows all movies
   let searchResults = (

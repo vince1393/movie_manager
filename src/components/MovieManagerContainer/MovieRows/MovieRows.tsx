@@ -1,6 +1,5 @@
 import React from "react";
 import { BelongsToCollection } from "../../../obj/queries";
-import Poster from "../../common/Poster/Poster";
 import MovieRow from "./MovieRow/MovieRow";
 import { SortOptions } from "../../../obj/constants";
 import CollectionRow from "./CollectionRow/CollectionRow";
@@ -26,8 +25,9 @@ const MovieRows = (props: Props) => {
     const uniqueGenres: string[] = [...new Set(allGenres)];
     return uniqueGenres
       .sort()
-      .map(genre => (
+      .map((genre, index) => (
         <MovieRow
+          key={index}
           genre={genre}
           movies={movies.filter(movie => movie.Genre.includes(genre))}
           onPosterClick={onPosterClick}
@@ -43,8 +43,9 @@ const MovieRows = (props: Props) => {
     const uniqueAlpha: string[] = [...new Set(allAlpha)];
     return uniqueAlpha
       .sort()
-      .map(char => (
+      .map((char, index) => (
         <MovieRow
+          key={index}
           genre={char}
           movies={movies.filter(movie => movie.Title.split("")[0].toUpperCase() === char)}
           onPosterClick={onPosterClick}
@@ -53,7 +54,7 @@ const MovieRows = (props: Props) => {
   };
 
   const createRowsByAll = (): JSX.Element[] => [
-    <Search movies={movies} onPosterClick={onPosterClick}/>
+    <Search key={1} movies={movies} onPosterClick={onPosterClick} />
   ];
 
   const createRowsBySeries = () => {
@@ -61,7 +62,12 @@ const MovieRows = (props: Props) => {
       .filter(movie => movie.BelongsToCollection)
       .map(movie => movie.BelongsToCollection) as BelongsToCollection[];
     return [
-      <CollectionRow movies={movies} collections={allCollections} onPosterClick={onPosterClick} />
+      <CollectionRow
+        key={1}
+        movies={movies}
+        collections={allCollections}
+        onPosterClick={onPosterClick}
+      />
     ];
   };
 

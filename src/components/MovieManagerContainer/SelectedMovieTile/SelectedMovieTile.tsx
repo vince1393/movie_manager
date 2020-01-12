@@ -59,7 +59,6 @@ const SelectedMovieTile = (props: Props) => {
             year={movie.Year}
             length={movie.Runtime}
             genres={movie.Genre}
-            country={movie.Country}
             boxOffice={movie.BoxOffice}
             handlePlay={startMovie}
           />

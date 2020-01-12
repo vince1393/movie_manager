@@ -6,7 +6,6 @@ import styles from "./MovieManagerContainer.module.css";
 import { getMovies } from "../../api/movieApi";
 import Loading from "../common/Loading/Loading";
 import { LoadingStatus, SortOptions } from "../../obj/constants";
-import Poster from "../common/Poster/Poster";
 import MovieRows from "./MovieRows/MovieRows";
 import Header from "../common/Heading/Header";
 import Sidebar from "./Sidebar/Sidebar";
@@ -36,7 +35,7 @@ const MovieManagerContainer = (props: Props) => {
   useEffect(() => {
     const moviePaths = getMoviePaths(props.path);
     getMovieInfo(moviePaths);
-  }, []);
+  }, [props.path]);
 
   // This syncs the boolean value with the content.
   // Not using content for showing because causes the component to snap shut as oppposed to animate
