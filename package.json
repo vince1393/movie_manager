@@ -42,10 +42,8 @@
     "fs": "0.0.1-security",
     "parse-torrent-title": "^1.2.0",
     "react": "^16.12.0",
-    "react-crossfade-image": "^1.2.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "react-slideshow-image": "^1.3.3",
     "react-youtube": "^7.9.0",
     "typescript": "^3.7.4"
   },
