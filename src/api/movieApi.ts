@@ -3,8 +3,23 @@ import { SearchTMDBMovie, TMDBMovie } from "../obj/queries";
 import { Movie } from "../obj/types";
 import ptt from "parse-torrent-title";
 const path = window.require("path");
-const tmdbApi: string = "https://api.themoviedb.org/3";
-const tmdbImageUrl: string = "https://image.tmdb.org/t/p/w500/";
+
+//poster -> "w92" | "w154" | "w185" | "w342" | "w500" | "w780" | "original"
+// backdrop -> "w300" | "w780" | "w1280" | "original"
+const size = {
+  poster: "w342",
+  backdrop: "w500"
+};
+
+const apiVersion = {
+  version3: "3",
+  version4: "4"
+};
+
+const tmdbApi: string = `https://api.themoviedb.org/${apiVersion.version3}`;
+
+const posterUrl: string = `https://image.tmdb.org/t/p/${size.poster}/`;
+const backdropUrl: string = `https://image.tmdb.org/t/p/${size.backdrop}/`;
 
 export const searchMovie = async (title: string, year: string = ""): Promise<Movie | undefined> => {
   const formattedTitle = encodeURI(title);
@@ -43,18 +58,18 @@ const convertTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
     Language: tmdbMovie.original_language,
     Country: tmdbMovie.production_countries.map(country => country.name).join(", "),
     Awards: "", //NOT SUPPORTED BY NEW API YET
-    Poster: tmdbMovie.poster_path ? tmdbImageUrl + tmdbMovie.poster_path : undefined,
+    Poster: tmdbMovie.poster_path ? posterUrl + tmdbMovie.poster_path : undefined,
     Backdrop: tmdbMovie.images?.backdrops
-      ? tmdbMovie.images.backdrops.map(backdrop => tmdbImageUrl + backdrop.file_path)
+      ? tmdbMovie.images.backdrops.map(backdrop => backdropUrl + backdrop.file_path)
       : undefined,
     BelongsToCollection: tmdbMovie.belongs_to_collection && {
       id: tmdbMovie.belongs_to_collection.id,
       name: tmdbMovie.belongs_to_collection.name,
       poster_path: tmdbMovie.belongs_to_collection.poster_path
-        ? tmdbImageUrl + tmdbMovie.belongs_to_collection.poster_path
+        ? posterUrl + tmdbMovie.belongs_to_collection.poster_path
         : undefined,
       backdrop_path: tmdbMovie.belongs_to_collection.backdrop_path
-        ? tmdbImageUrl + tmdbMovie.belongs_to_collection.backdrop_path
+        ? backdropUrl + tmdbMovie.belongs_to_collection.backdrop_path
         : undefined
     },
     imdbID: tmdbMovie.imdb_id,

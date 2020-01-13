@@ -6,6 +6,10 @@
   width: fit-content;
 }
 
+.backdrop {
+  width: 500px;
+}
+
 /* .poster {
   display: inline-block;
   position: absolute;
@@ -67,13 +71,31 @@ img {
   display: table;
 }
  */
+
+.backdrop {
+  transition: all 1s ease;
+  cursor: pointer;
+  width: 500px;
+  display: inline-block;
+  margin: 0.5em;
+  max-height: 18em;
+  position: relative;
+}
+
 .poster {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease 0s;
+  transition: all 1s ease;
   cursor: pointer;
   margin: 0.5em;
-  max-height: 13em;
+  max-height: 18em;
   display: inline-block;
+}
+
+.infoOverlay {
+  position: absolute;
+  width: 500px;
+  height: 18em;
+  z-index: 2;
 }
 
 .poster:hover,
@@ -88,4 +110,17 @@ img {
 
 .empty p {
   display: table;
+}
+
+.detail {
+  color: white;
+  font-size: 0.8em;
+  margin: 0.5vh 0.3vw;
+  margin-bottom: 0;
+  padding: 0.2vh 0.3vw;
+  display: inline-block;
+}
+
+.mpaaRating {
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }

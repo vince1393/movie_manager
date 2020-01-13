@@ -28,8 +28,9 @@ const CollectionRow = (props: Props) => {
         {filteredCollections.map(collection => {
           return (
             <Poster
-              title={collection.name}
-              posterUrl={collection.poster_path}
+              Title={collection.name}
+              Poster={collection.poster_path}
+              isHover={false}
               onClick={() =>
                 setcollectionMovies(
                   movies.filter(movie => movie.BelongsToCollection?.id === collection.id)
@@ -51,8 +52,9 @@ const CollectionRow = (props: Props) => {
             .sort((firstMovie, secondMovie) => (firstMovie.Year > secondMovie.Year ? 1 : -1))
             .map(movie => (
               <Poster
-                title={movie.Title}
-                posterUrl={movie.Poster}
+                Title={movie.Title}
+                Poster={movie.Poster}
+                isHover={false}
                 onClick={() => onPosterClick(movie)}
                 onKeyDown={e => e.key === "Enter" && onPosterClick(movie)}
               />

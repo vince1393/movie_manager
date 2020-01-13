@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Movie } from "../../../../obj/types";
 import Poster from "../../../common/Poster/Poster";
 import styles from "./MovieRow.module.css";
@@ -12,6 +12,7 @@ type Props = {
 
 const MovieRow = (props: Props) => {
   const { genre, movies, onPosterClick, isMultiRow } = props;
+  const [hoveredPoster, sethoveredPoster] = useState<number | undefined>(undefined);
   return (
     <div>
       <h2 className={styles.rowHeader}>{genre}</h2>
@@ -20,8 +21,18 @@ const MovieRow = (props: Props) => {
           return (
             <Poster
               key={index}
-              title={movie.Title}
-              posterUrl={movie.Poster}
+              Title={movie.Title}
+              Year={movie.Year}
+              Rated={movie.Rated}
+              Runtime={movie.Runtime}
+              Genre={movie.Genre}
+              Poster={movie.Poster}
+              Backdrop={movie.Backdrop}
+              BoxOffice={movie.BoxOffice}
+              mpaaRating={movie.mpaaRating}
+              isHover={hoveredPoster === index}
+              onEnter={() => sethoveredPoster(index)}
+              onLeave={() => sethoveredPoster(undefined)}
               onClick={() => onPosterClick(movie)}
               onKeyDown={e => e.key === "Enter" && onPosterClick(movie)}
             />
