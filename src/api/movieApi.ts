@@ -16,7 +16,7 @@ const apiVersion = {
   version4: "4"
 };
 
-const tmdbApi: string = `https://api.themoviedb.org/${apiVersion.version3}`;
+const tmdbApi: string = `https://api.themoviedb.org/${apiVersion.version3}/`;
 
 const posterUrl: string = `https://image.tmdb.org/t/p/${size.poster}/`;
 const backdropUrl: string = `https://image.tmdb.org/t/p/${size.backdrop}/`;
@@ -26,7 +26,7 @@ export const searchMovie = async (title: string, year: string = ""): Promise<Mov
 
   const SearchMovie: SearchTMDBMovie = await axios
     .get(
-      `${tmdbApi}/search/movie?api_key=${process.env.REACT_APP_API_KEY_TMDB}&query=${formattedTitle}&year=${year}`
+      `${tmdbApi}search/movie?api_key=${process.env.REACT_APP_API_KEY_TMDB}&query=${formattedTitle}&year=${year}`
     )
     .then(response => {
       return response.data.total_results > 0
@@ -76,7 +76,7 @@ const convertTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
     BoxOffice: tmdbMovie.revenue ? "$" + tmdbMovie.revenue.toLocaleString() : "Unknown",
     Production: tmdbMovie.production_companies.map(company => company.name),
     Website: tmdbMovie.homepage,
-    trailerKey: tmdbMovie.videos.results[0]?.key,
+    TrailerKeys: tmdbMovie.videos.results.map(result => result.key),
     mpaaRating: tmdbMovie?.release_dates?.results.filter(result => result.iso_3166_1 === "US")[0]
       ?.release_dates[0]?.certification
   };
@@ -85,7 +85,7 @@ const convertTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
 export const getMovie = async (id: number): Promise<TMDBMovie> => {
   return await axios
     .get(
-      `${tmdbApi}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY_TMDB}&append_to_response=videos,images,credits,release_dates`
+      `${tmdbApi}movie/${id}?api_key=${process.env.REACT_APP_API_KEY_TMDB}&append_to_response=videos,images,credits,release_dates`
     )
     .then(response => {
       return response.data

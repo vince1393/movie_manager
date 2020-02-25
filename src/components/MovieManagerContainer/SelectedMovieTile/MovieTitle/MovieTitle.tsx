@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./MovieTitle.module.css";
+import Rating from "../../../common/Rating/Rating";
+import MovieLength from "../../../common/MovieLength/MovieLength";
 
 type Props = {
   title: string;
@@ -15,23 +17,6 @@ type Props = {
 const MovieTitle = (props: Props) => {
   const { title, rating, mpaaRating, length, genres, year, boxOffice, handlePlay } = props;
 
-  const getRatingColor = (): string => {
-    const numRating = parseFloat(rating);
-    if (numRating > 7) return styles.good;
-    else if (numRating > 5) return styles.average;
-    else return styles.poor;
-  };
-
-  const calculateLength = (): string => {
-    const movieLength = parseInt(length);
-    if (isNaN(movieLength)) return "Unknown Length";
-    else {
-      const hours = Math.floor(movieLength / 60);
-      const mins = movieLength % 60;
-      return `${hours}h ${mins}m`;
-    }
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
@@ -42,11 +27,11 @@ const MovieTitle = (props: Props) => {
       </div>
       <div className={styles.detailContainer}>
         <div className={[styles.detail].join(" ")}>{year}</div>
-        <div className={[styles.detail, getRatingColor(), styles.rating].join(" ")}>{rating}</div>
+        <Rating rating={rating} />
         <div className={[styles.detail, styles.mpaaRating].join(" ")}>
           {mpaaRating || "Unrated"}
         </div>
-        <div className={[styles.detail].join(" ")}>{calculateLength()}</div>
+        <MovieLength length={length} />
         {/* <div className={[styles.detail].join(" ")}>{country}</div> */}
         <div className={[styles.detail].join(" ")}>{boxOffice}</div>
         <div className={[styles.detail].join(" ")}>

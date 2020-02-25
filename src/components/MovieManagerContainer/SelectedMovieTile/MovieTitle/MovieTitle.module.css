@@ -29,21 +29,6 @@
   margin: 0;
 }
 
-.good {
-  color: rgb(0, 145, 0);
-}
-
-.average {
-  color: rgb(250, 218, 94);
-}
-.poor {
-  color: rgb(145, 0, 0);
-}
-
-.rating {
-  font-weight: bold;
-}
-
 .mpaaRating {
   border: 1px solid rgba(255, 255, 255, 0.8);
 }

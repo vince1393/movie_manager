@@ -22,7 +22,7 @@ export type Movie = {
   Website: string;
   Path?: string;
   BelongsToCollection?: BelongsToCollection;
-  trailerKey: string;
+  TrailerKeys: string[];
   mpaaRating?: string;
 };
 

@@ -136,6 +136,45 @@
   width: 100%;
   height: 100%;
   z-index: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overlayButton {
+  color: white;
+  opacity: 0.5;
+  border: none;
+  height: 0;
+  width: 0;
+  display: none;
+}
+
+.buttonLeft {
+  border-right: rgba(100, 100, 100, 0.5) 60px solid;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+}
+
+.buttonRight {
+  border-left: rgba(100, 100, 100, 0.5) 60px solid;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+}
+
+.buttonLeft:hover {
+  border-right: rgba(100, 100, 100, 0.9) 60px solid;
+  cursor: pointer;
+}
+
+.buttonRight:hover {
+  border-left: rgba(100, 100, 100, 0.9) 60px solid;
+}
+
+.videoOverlay:hover .overlayButton {
+  display: block;
+  cursor: pointer;
 }
 
 @keyframes op {

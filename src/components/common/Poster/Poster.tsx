@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Poster.module.css";
 import ImageFader from "../ImageFader/ImageFader";
+import Rating from "../Rating/Rating";
+import MovieLength from "../MovieLength/MovieLength";
 
 type Props = {
   Title: string;
@@ -40,12 +42,12 @@ const Poster = (props: Props) => {
 
   const overlay = (
     <div className={styles.infoOverlay}>
-      {Title}
-      {Year}
-      {Rated}
-      {Runtime}
+      <div>{Title}</div>
+      <div>{Year}</div>
+      <Rating rating={Rated || "0"} />
+      <MovieLength length={Runtime || "0"} />
       <div> {Genre?.join(" ● ")}</div>
-      {BoxOffice}
+      <div>{BoxOffice}</div>
       <div className={[styles.detail, styles.mpaaRating].join(" ")}> {mpaaRating}</div>
     </div>
   );

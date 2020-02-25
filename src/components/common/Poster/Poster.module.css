@@ -7,73 +7,7 @@
 }
 
 .backdrop {
-  width: 500px;
-}
-
-/* .poster {
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  opacity: 1;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
   transition: all 2s ease;
-  cursor: pointer;
-  width: auto;
-  max-width: 400px;
-  margin: 5px;
-  overflow: hidden;
-}
-
-.posterHidden {
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  transition: all 2s ease;
-  width: auto;
-  max-width: 400px;
-  margin: 5px;
-  overflow: hidden;
-}
-
-img {
-  display: inline-block;
-  height: auto;
-  max-height: 100%;
-  max-width: 100%;
-}
-
-.video {
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  opacity: 1;
-  transition: all 2s ease;
-  width: 640px;
-  max-width: 640px;
-}
-.videoHidden {
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  transition: all 2s ease;
-  width: 640px;
-  max-width: 640px;
-}
-
-.empty {
-  max-width: 140px;
-  width: 140px;
-}
-
-.empty p {
-  display: table;
-}
- */
-
-.backdrop {
-  transition: all 1s ease;
   cursor: pointer;
   width: 500px;
   display: inline-block;
@@ -84,7 +18,7 @@ img {
 
 .poster {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-  transition: all 1s ease;
+  transition: all 2s ease;
   cursor: pointer;
   margin: 0.5em;
   max-height: 18em;
@@ -96,6 +30,15 @@ img {
   width: 500px;
   height: 18em;
   z-index: 2;
+  display: flex;
+  transition: all 2s ease;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.infoOverlay div {
+  width: fit-content;
 }
 
 .poster:hover,

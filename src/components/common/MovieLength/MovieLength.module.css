@@ -1,0 +1,12 @@
+.detail {
+  color: white;
+  font-size: 0.8em;
+  margin: 0.5vh 0.3vw;
+  margin-bottom: 0;
+  padding: 0.2vh 0.3vw;
+  display: inline-block;
+}
+
+.detail pre {
+  margin: 0;
+}

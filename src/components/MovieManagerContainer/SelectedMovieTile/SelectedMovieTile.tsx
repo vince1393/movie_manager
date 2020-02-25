@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Movie } from "../../../obj/types";
 //import { SelectedMovie } from "../../../obj/constants";
 import styles from "./SelectedMovieTile.module.css";
 import { ReactComponent as Chevron } from "../../../assets/icons/chevron_up.svg";
 import MovieTitle from "./MovieTitle/MovieTitle";
 import YouTube, { Options } from "react-youtube";
+import { symlink } from "fs";
 const shell = window.require("electron").shell;
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
   handleClose: () => void;
 };
 const SelectedMovieTile = (props: Props) => {
+  const [trailerIndex, setTrailerIndex] = useState(0);
   const { movie, handleClose, isOpen } = props;
 
   const options: Options = {
@@ -48,6 +50,24 @@ const SelectedMovieTile = (props: Props) => {
       console.error(e);
     }
   };
+
+  const trailerEnd = (_event: any) => {
+    nextTrailer();
+  };
+
+  const nextTrailer = () => {
+    console.log("NEXT", trailerIndex, movie.TrailerKeys.length);
+    if (movie.TrailerKeys.length === 0) return;
+    else if (trailerIndex < movie.TrailerKeys.length - 1) setTrailerIndex(index => ++index);
+    else setTrailerIndex(0);
+  };
+
+  const previousTrailer = () => {
+    console.log("BACK", trailerIndex, movie.TrailerKeys.length);
+    if (movie.TrailerKeys.length === 0) return;
+    else if (trailerIndex > 0) setTrailerIndex(index => --index);
+    else setTrailerIndex(0);
+  };
   return (
     <div className={[styles.outerContainer, isOpen ? styles.visible : styles.hidden].join(" ")}>
       <div className={styles.innerContainer}>
@@ -81,14 +101,31 @@ const SelectedMovieTile = (props: Props) => {
           </div>
         </div>
         <div className={styles.selectedPoster}>
-          <div className={styles.videoOverlay}></div>
+          <div className={styles.videoOverlay}>
+            <div
+              onClick={previousTrailer}
+              className={[
+                styles.overlayButton,
+                styles.buttonLeft,
+                trailerIndex > 0 ? "" : styles.hidden
+              ].join(" ")}
+            ></div>
+            <div
+              onClick={nextTrailer}
+              className={[
+                styles.overlayButton,
+                styles.buttonRight,
+                trailerIndex < movie.TrailerKeys.length - 1 ? "" : styles.hidden
+              ].join(" ")}
+            ></div>
+          </div>
           <YouTube
             //className={styles.trailer} // defaults -> null
-            videoId={movie.trailerKey} // defaults -> null
-            id={movie.trailerKey} // defaults -> null
+            videoId={movie.TrailerKeys[trailerIndex]} // defaults -> null
+            id={movie.TrailerKeys[trailerIndex]} // defaults -> null
             //containerClassName={styles.video} // defaults -> ''
             opts={options} // defaults -> {}
-            //onEnd={} // defaults -> noop
+            onEnd={trailerEnd} // defaults -> noop
           />
         </div>
       </div>
