@@ -80,7 +80,7 @@ const MovieRows = (props: Props) => {
       movieRows = createRowsByAlpha();
       break;
 
-    case SortOptions.All:
+    case SortOptions.Search:
       movieRows = createRowsByAll();
       break;
 

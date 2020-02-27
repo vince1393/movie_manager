@@ -64,6 +64,6 @@ export enum LoadingStatus {
 export enum SortOptions {
   Genre = "Genre",
   Alphabetical = "Alphabetical",
-  All = "All",
+  Search = "Search",
   Series = "Series"
 }

@@ -10,6 +10,7 @@ type Props = {
 
 const Search = (props: Props) => {
   const [searchText, setSearchText] = useState<string>("");
+  const [time, setTime] = useState();
   const { movies, onPosterClick } = props;
 
   // default shows all movies
@@ -82,14 +83,26 @@ const Search = (props: Props) => {
     );
   }
 
+  // This delays the search while the user is typing. Improves performance with big libraries
+  const handleSearch = (searchValue: string) => {
+    if (time) clearTimeout(time);
+    setTime(
+      setTimeout(() => {
+        setSearchText(searchValue);
+      }, 300)
+    );
+  };
+
   return (
     <div>
-      <input
-        type="text"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value)}
-        className={styles.searchBar}
-        placeholder="Search"
-      />
+      <div>
+        <input
+          type="text"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
+          className={styles.searchBar}
+          placeholder="Search"
+        />
+      </div>
       {searchResults}
     </div>
   );

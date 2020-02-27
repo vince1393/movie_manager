@@ -13,12 +13,6 @@
   overflow: hidden;
 }
 
-* {
-  overflow: hidden;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
 .innerContainer {
   display: flex;
   flex-direction: row;
