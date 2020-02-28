@@ -6,7 +6,9 @@ type Props = {
 };
 
 const Rating = (props: Props) => {
-  const { rating } = props;
+  let { rating } = props;
+
+  if (!rating) rating = "N/A";
 
   const getRatingColor = (): string => {
     const numRating = parseFloat(rating);
