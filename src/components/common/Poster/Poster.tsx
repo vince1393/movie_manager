@@ -22,7 +22,7 @@ type Props = {
 };
 
 const Poster = (props: Props) => {
-  const {
+  let {
     Title,
     Year,
     Rated,
@@ -39,6 +39,15 @@ const Poster = (props: Props) => {
     isHover
   } = props;
   let poster;
+
+  onEnter = () => {
+    props.onEnter && props.onEnter();
+    console.log("ENTER");
+  };
+  onLeave = () => {
+    props.onLeave && props.onLeave();
+    console.log("LEAVE");
+  };
 
   const overlay = (
     <div className={styles.infoOverlay}>
@@ -84,8 +93,8 @@ const Poster = (props: Props) => {
   }
   return (
     <div
-      onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      onMouseOver={onEnter}
       className={isHover ? styles.backdrop : styles.poster}
       onClick={onClick}
     >

@@ -23,6 +23,7 @@
   margin: 0.5em;
   max-height: 18em;
   display: inline-block;
+  width: 224px;
 }
 
 .infoOverlay {
